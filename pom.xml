@@ -6,11 +6,10 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>2</version>
+		<version>4</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
-	<version>3</version>
 	<packaging>pom</packaging>
 
 	<name>Braintags Vert.x Parent</name>
@@ -23,7 +22,7 @@
 	</scm>
 
 	<properties>
-		<vertx.stack.version>3.0.0-SNAPSHOT</vertx.stack.version>
+    	<stack.version>3.0.0</stack.version>
 		<braintags.vertx.version>1.0.0-SNAPSHOT</braintags.vertx.version>
 
 		<asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
@@ -43,7 +42,7 @@
 			<dependency>
 				<groupId>io.vertx</groupId>
 				<artifactId>vertx-dependencies</artifactId>
-				<version>${vertx.stack.version}</version>
+				<version>${stack.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
