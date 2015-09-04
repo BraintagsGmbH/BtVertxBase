@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>4</version>
+		<version>5</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -121,10 +121,29 @@
 							<configuration>
 								<filesets>
 									<fileset>
-										<directory>src/main/asciidoc</directory>
+										<directory>src/main/asciidoc/java</directory>
 									</fileset>
 									<fileset>
-										<directory>${asciidoc.dir}</directory>
+										<directory>src/main/asciidoc/groovy</directory>
+									</fileset>
+									<fileset>
+										<directory>src/main/asciidoc/js</directory>
+									</fileset>
+									<fileset>
+										<directory>src/main/asciidoc/ruby</directory>
+									</fileset>
+									
+									<fileset>
+										<directory>${asciidoc.dir}/java</directory>
+									</fileset>
+									<fileset>
+										<directory>${asciidoc.dir}/groovy</directory>
+									</fileset>
+									<fileset>
+										<directory>${asciidoc.dir}/js</directory>
+									</fileset>
+									<fileset>
+										<directory>${asciidoc.dir}/ruby</directory>
 									</fileset>
 								</filesets>
 							</configuration>
