@@ -35,6 +35,12 @@
 		<!-- We skip sources jar generation as we do it with the assembly plugin 
 			to have greater control over the content -->
 		<source.skip>true</source.skip>
+		
+	    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+	    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+	    <maven.javadoc.failOnError>true</maven.javadoc.failOnError>
+	<!--     <maven.compiler.compilerReuseStrategy>${alwaysNew}</maven.compiler.compilerReuseStrategy> -->
+    	<pac4j.version>1.6.0</pac4j.version>
 	</properties>
 
 	<dependencyManagement>
