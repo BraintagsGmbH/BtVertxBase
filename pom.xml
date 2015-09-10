@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>5</version>
+		<version>7-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -24,18 +24,12 @@
 	<properties>
     	<stack.version>3.0.0</stack.version>
 		<braintags.vertx.version>1.0.0-SNAPSHOT</braintags.vertx.version>
-
-		<asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
-
-		<!-- Configure plugins that skip building documentation that otherwise 
-			would fail without the documentation bits. This is useful in pom aggregators 
-			that don't have documentation to build, they change this property to true. -->
-		<doc.skip>true</doc.skip>
-
-		<!-- We skip sources jar generation as we do it with the assembly plugin 
-			to have greater control over the content -->
-		<source.skip>true</source.skip>
 		
+		<skipAssembly>true</skipAssembly>
+		<!-- skip maven-compiler-plugin? -->
+		<maven.compiler.plugin>true</maven.compiler.plugin>
+		
+		<asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
 	    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 	    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 	    <maven.javadoc.failOnError>true</maven.javadoc.failOnError>
@@ -156,6 +150,7 @@
 						<execution>
 							<id>default-compile</id>
 							<configuration>
+								<skip>${maven.compiler.plugin}</skip>
 								<annotationProcessors>
 									<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
 									<annotationProcessor>io.vertx.docgen.JavaDocGenProcessor</annotationProcessor>
@@ -285,7 +280,8 @@
 						<goals>
 							<goal>single</goal>
 						</goals>
-						<configuration>
+						<configuration>						
+							<skipAssembly>${skipAssembly}</skipAssembly>
 							<attach>true</attach>
 							<archive>
 								<!-- Need a manifest to avoid empty archive -->
@@ -447,6 +443,7 @@
 							</dependency>
 						</dependencies>
 					</plugin>
+					
 					<plugin>
 						<artifactId>maven-assembly-plugin</artifactId>
 						<dependencies>
