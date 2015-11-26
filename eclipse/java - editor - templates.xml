@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="java" deleted="false" description="add a LOGGER" enabled="true" name="LOGGER">private static final io.vertx.core.logging.Logger LOGGER = io.vertx.core.logging.LoggerFactory.getLogger( ${enclosing_type}.class);
+
+</template></templates>
