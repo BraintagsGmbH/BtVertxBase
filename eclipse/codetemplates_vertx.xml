@@ -22,7 +22,7 @@
  * ${see_to_target}
  */</template><template autoinsert="false" context="newtype_context" deleted="false" description="Newly created files" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.newtype" name="newtype">/*
  * #%L
- * vertx-pojongo
+ * ${project_name}
  * %%
  * Copyright (C) 2015 Braintags GmbH
  * %%
