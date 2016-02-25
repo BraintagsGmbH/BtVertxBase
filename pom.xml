@@ -36,7 +36,7 @@
 	<!--     <maven.compiler.compilerReuseStrategy>${alwaysNew}</maven.compiler.compilerReuseStrategy> -->
     	<pac4j.version>1.6.0</pac4j.version>
 	</properties>
-
+ 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -107,7 +107,7 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 			<version>4.11</version>
-		</dependency>		
+		</dependency>
 	</dependencies>
 
 	<build>
