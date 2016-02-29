@@ -22,7 +22,7 @@
 	</scm>
 
 	<properties>
-    	<stack.version>3.2.0</stack.version>
+    	<stack.version>3.2.1</stack.version>
 		<braintags.vertx.version>1.0.1-SNAPSHOT</braintags.vertx.version>
 		
 		<skipAssembly>true</skipAssembly>
