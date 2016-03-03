@@ -28,8 +28,7 @@
 		<skipAssembly>true</skipAssembly>
 		<!-- skip maven-compiler-plugin? -->
 		<maven.compiler.plugin>true</maven.compiler.plugin>
-		
-		<asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
+		<asciidoc.dir>${project.basedir}/src/docs/asciidoc</asciidoc.dir>
 	    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 	    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 	    <maven.javadoc.failOnError>true</maven.javadoc.failOnError>
