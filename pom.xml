@@ -120,19 +120,6 @@
 							<configuration>
 								<filesets>
 									<fileset>
-										<directory>src/main/asciidoc/java</directory>
-									</fileset>
-									<fileset>
-										<directory>src/main/asciidoc/groovy</directory>
-									</fileset>
-									<fileset>
-										<directory>src/main/asciidoc/js</directory>
-									</fileset>
-									<fileset>
-										<directory>src/main/asciidoc/ruby</directory>
-									</fileset>
-									
-									<fileset>
 										<directory>${asciidoc.dir}/java</directory>
 									</fileset>
 									<fileset>
