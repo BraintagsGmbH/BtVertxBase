@@ -24,11 +24,13 @@
 	<properties>
     	<stack.version>3.2.1</stack.version>
 		<braintags.vertx.version>1.0.1-SNAPSHOT</braintags.vertx.version>
-		
+		<sonar.language>java</sonar.language>
+		<sonar.host.url>http://sqube.bt-rz.net</sonar.host.url>
+			
 		<skipAssembly>true</skipAssembly>
 		<!-- skip maven-compiler-plugin? -->
 		<maven.compiler.plugin>true</maven.compiler.plugin>
-		<asciidoc.dir>${project.basedir}/src/docs/asciidoc</asciidoc.dir>
+		<asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
 	    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 	    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 	    <maven.javadoc.failOnError>true</maven.javadoc.failOnError>
