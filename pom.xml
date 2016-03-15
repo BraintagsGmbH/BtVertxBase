@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>10-SNAPSHOT</version>
+		<version>10</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
