@@ -22,7 +22,7 @@
 	</scm>
 
 	<properties>
-		<bt.vertx.version>1.0.0-ms1</bt.vertx.version>
+		<bt.vertx.version>1.0.0</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
 		<sonar.language>java</sonar.language>
 		<sonar.host.url>http://sqube.bt-rz.net</sonar.host.url>
