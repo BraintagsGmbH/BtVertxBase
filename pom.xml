@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>10</version>
+		<version>11</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -22,28 +22,95 @@
 	</scm>
 
 	<properties>
-    	<stack.version>3.2.1</stack.version>
+		<bt.vertx.version>1.0.0-ms1</bt.vertx.version>
+		<stack.version>3.2.1</stack.version>
 		<sonar.language>java</sonar.language>
 		<sonar.host.url>http://sqube.bt-rz.net</sonar.host.url>
 		<skipAssembly>true</skipAssembly>
 		<!-- skip maven-compiler-plugin? -->
 		<maven.compiler.plugin>true</maven.compiler.plugin>
 		<asciidoc.dir>${project.basedir}/src/docs/asciidoc</asciidoc.dir>
-	    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-	    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-	    <maven.javadoc.failOnError>true</maven.javadoc.failOnError>
-	<!--     <maven.compiler.compilerReuseStrategy>${alwaysNew}</maven.compiler.compilerReuseStrategy> -->
-    	<pac4j.version>1.6.0</pac4j.version>
+		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+		<maven.javadoc.failOnError>true</maven.javadoc.failOnError>
+		<!-- <maven.compiler.compilerReuseStrategy>${alwaysNew}</maven.compiler.compilerReuseStrategy> -->
+		<pac4j.version>1.6.0</pac4j.version>
 	</properties>
- 
+
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-util</artifactId>
+				<version>${bt.vertx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-util</artifactId>
+				<version>${bt.vertx.version}</version>
+				<classifier>tests</classifier>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-key-generator</artifactId>
+				<version>${bt.vertx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-key-generator</artifactId>
+				<version>${bt.vertx.version}</version>
+				<classifier>tests</classifier>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-pojo-mapper-common</artifactId>
+				<version>${bt.vertx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-pojo-mapper-json</artifactId>
+				<version>${bt.vertx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-pojo-mapper-mysql</artifactId>
+				<version>${bt.vertx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-pojongo</artifactId>
+				<version>${bt.vertx.version}</version>
+			</dependency>
+		<dependency>
+			<groupId>de.braintags</groupId>
+			<artifactId>vertx-pojo-mapper-common-test</artifactId>
+				<version>${bt.vertx.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>de.braintags</groupId>
+			<artifactId>vertx-pojo-mapper-json</artifactId>
+			<classifier>tests</classifier>
+				<version>${bt.vertx.version}</version>
+		</dependency>
+
+			<dependency>
+				<groupId>io.vertx</groupId>
+				<artifactId>vertx-mongo-service</artifactId>
+				<scope>test</scope>
+				<classifier>tests</classifier>
+				<version>${stack.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>io.vertx</groupId>
 				<artifactId>vertx-dependencies</artifactId>
 				<version>${stack.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -88,10 +155,10 @@
 			<artifactId>vertx-rx-java</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
-		  <groupId>io.vertx</groupId>
-		  <artifactId>vertx-unit</artifactId>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-unit</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -153,10 +220,10 @@
 									<arg>-AoutputDirectory=${project.basedir}/src/main</arg>
 									<!-- $lang is replaced by the docgen processor to the target lang -->
 									<arg>-Adocgen.output=${asciidoc.dir}/$lang</arg>
-									 <!--  properties replaced in the asciidoc document -->
-					                  <arg>-Amaven.groupId=${project.groupId}</arg>
-					                  <arg>-Amaven.artifactId=${project.artifactId}</arg>
-					                  <arg>-Amaven.version=${project.version}</arg>
+									<!-- properties replaced in the asciidoc document -->
+									<arg>-Amaven.groupId=${project.groupId}</arg>
+									<arg>-Amaven.artifactId=${project.artifactId}</arg>
+									<arg>-Amaven.version=${project.version}</arg>
 								</compilerArgs>
 							</configuration>
 						</execution>
@@ -276,7 +343,7 @@
 						<goals>
 							<goal>single</goal>
 						</goals>
-						<configuration>						
+						<configuration>
 							<skipAssembly>${skipAssembly}</skipAssembly>
 							<attach>true</attach>
 							<archive>
@@ -328,24 +395,24 @@
 			</dependencies>
 			<build>
 				<plugins>
-			      <plugin>
-			        <artifactId>maven-antrun-plugin</artifactId>
-			        <version>1.8</version>
-			        <executions>
-			          <execution>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
 								<phase>process-sources</phase>
-			            <configuration>
-			              <target>
-			          		<mkdir dir="${asciidoc.dir}"/>
-			              </target>
-			            </configuration>
-			            <goals>
-			              <goal>run</goal>
-			            </goals>
-			          </execution>
-			        </executions>
-			      </plugin>					
-				
+								<configuration>
+									<target>
+										<mkdir dir="${asciidoc.dir}" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
 					<plugin>
 						<groupId>org.asciidoctor</groupId>
 						<artifactId>asciidoctor-maven-plugin</artifactId>
@@ -457,7 +524,7 @@
 							</dependency>
 						</dependencies>
 					</plugin>
-					
+
 					<plugin>
 						<artifactId>maven-assembly-plugin</artifactId>
 						<dependencies>
