@@ -1,11 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<version>13-SNAPSHOT</version>
 
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>13-SNAPSHOT</version>
+		<version>12</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -22,7 +21,7 @@
   </scm>
 
 	<properties>
-		<bt.vertx.version>1.1.0_SNAPSHOT</bt.vertx.version>
+		<bt.vertx.version>1.0.0</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
 		
 		<sonar.language>java</sonar.language>
@@ -448,10 +447,12 @@
 								</configuration>
 								<goals>
 									<goal>javadoc</goal>
+									<goal>jar</goal>
 								</goals>
 							</execution>
 						</executions>
 					</plugin>
+					
 					<plugin>
 						<groupId>com.phasebash.jsdoc</groupId>
 						<artifactId>jsdoc3-maven-plugin</artifactId>
