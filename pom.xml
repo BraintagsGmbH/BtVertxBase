@@ -24,6 +24,7 @@
 		<bt.vertx.version>1.0.0</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
 		
+		<jsdoc.skip>true</jsdoc.skip>
 		<sonar.language>java</sonar.language>
 		<sonar.host.url>http://sqube.bt-rz.net</sonar.host.url>
 		<skipAssembly>true</skipAssembly>
@@ -465,7 +466,7 @@
 								</goals>
 								<configuration>
 									<recursive>true</recursive>
-									<skip>${doc.skip}</skip>
+									<skip>${jsdoc.skip}</skip>
 									<directoryRoots>
 										<directoryRoot>${basedir}/src/main/resources</directoryRoot>
 									</directoryRoots>
