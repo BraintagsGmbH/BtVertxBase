@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>11</version>
+		<version>12</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -81,17 +81,17 @@
 				<artifactId>vertx-pojongo</artifactId>
 				<version>${bt.vertx.version}</version>
 			</dependency>
-		<dependency>
-			<groupId>de.braintags</groupId>
-			<artifactId>vertx-pojo-mapper-common-test</artifactId>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-pojo-mapper-common-test</artifactId>
 				<version>${bt.vertx.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>de.braintags</groupId>
-			<artifactId>vertx-pojo-mapper-json</artifactId>
-			<classifier>tests</classifier>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-pojo-mapper-json</artifactId>
+				<classifier>tests</classifier>
 				<version>${bt.vertx.version}</version>
-		</dependency>
+			</dependency>
 
 			<dependency>
 				<groupId>io.vertx</groupId>
@@ -172,7 +172,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-			<version>4.11</version>
 		</dependency>
 	</dependencies>
 
@@ -572,4 +571,6 @@
 		</plugins>
 	</reporting>
 
+	<url>https://github.com/BraintagsGmbH/BtVertxBase</url>
+	<description>POM for all projects, which are using vert.x</description>
 </project>
