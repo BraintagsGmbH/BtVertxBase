@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>12</version>
+		<version>13-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -17,11 +17,10 @@
 		<connection>scm:git:git@github.com:BraintagsGmbH/BtVertxBase.git</connection>
 		<developerConnection>scm:git:git@github.com:BraintagsGmbH/BtVertxBase.git</developerConnection>
 		<url>git@github.com:BraintagsGmbH/BtVertxBase.git</url>
-	  <tag>HEAD</tag>
   </scm>
 
 	<properties>
-		<bt.vertx.version>1.0.0</bt.vertx.version>
+		<bt.vertx.version>1.1.0_SNAPSHOT</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
 		
 		<jsdoc.skip>true</jsdoc.skip>
