@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>12</version>
+		<version>13-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -22,7 +22,7 @@
   </scm>
 
 	<properties>
-		<bt.vertx.version>1.0.0</bt.vertx.version>
+		<bt.vertx.version>1.1.0_SNAPSHOT</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
 		
 		<sonar.language>java</sonar.language>
