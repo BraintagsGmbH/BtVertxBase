@@ -24,6 +24,7 @@
 	<properties>
 		<bt.vertx.version>1.0.0</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
+		
 		<sonar.language>java</sonar.language>
 		<sonar.host.url>http://sqube.bt-rz.net</sonar.host.url>
 		<skipAssembly>true</skipAssembly>
