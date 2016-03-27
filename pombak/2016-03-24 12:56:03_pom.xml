@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>13-SNAPSHOT</version>
+		<version>13_SNAPSHOT</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -20,7 +20,7 @@
   </scm>
 
 	<properties>
-		<bt.vertx.version>1.1.0-SNAPSHOT</bt.vertx.version>
+		<bt.vertx.version>1.1.0_SNAPSHOT</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
 		
 		<jsdoc.skip>true</jsdoc.skip>
@@ -202,6 +202,7 @@
 						</execution>
 					</executions>
 				</plugin>
+				
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<executions>
@@ -241,7 +242,7 @@
 				<plugin>
 					<groupId>org.asciidoctor</groupId>
 					<artifactId>asciidoctor-maven-plugin</artifactId>
-					<version>1.5.2.1</version>
+					<version>1.5.3</version>
 				</plugin>
 				<plugin>
 					<groupId>com.bluetrainsoftware.maven</groupId>
