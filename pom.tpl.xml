@@ -24,11 +24,12 @@
 		<stack.version>3.2.1</stack.version>
 		
 		<jsdoc.skip>true</jsdoc.skip>
-		<sonar.language>java</sonar.language>
-		<sonar.host.url>http://sqube.bt-rz.net</sonar.host.url>
+		
 		<skipAssembly>true</skipAssembly>
+		
 		<!-- skip maven-compiler-plugin? -->
-		<maven.compiler.plugin>true</maven.compiler.plugin>
+		<skip.maven.compiler.plugin>true</skip.maven.compiler.plugin>
+		
 		<asciidoc.dir>${project.basedir}/src/docs/asciidoc</asciidoc.dir>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
@@ -208,7 +209,7 @@
 						<execution>
 							<id>default-compile</id>
 							<configuration>
-								<skip>${maven.compiler.plugin}</skip>
+								<skip>${skip.maven.compiler.plugin}</skip>
 								<annotationProcessors>
 									<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
 									<annotationProcessor>io.vertx.docgen.JavaDocGenProcessor</annotationProcessor>
