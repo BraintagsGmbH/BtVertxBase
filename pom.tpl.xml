@@ -25,6 +25,10 @@
 		<stack.version>${VERTX_STACK_VERSION}</stack.version>
 		<vertx-ext-resources>20</vertx-ext-resources>
 		
+    	<sonar.projectKey>${project.groupId}.vertx:${project.artifactId}</sonar.projectKey>
+    	<sonar.language>java</sonar.language>
+    	<sonar.useWsCache>true</sonar.useWsCache>
+		
 		<jsdoc.skip>true</jsdoc.skip>
 		<skipAssembly>true</skipAssembly>
 		
