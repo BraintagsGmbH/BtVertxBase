@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>16</version>
+		<version>17-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -21,7 +21,7 @@
   </scm>
 
 	<properties>
-		<bt.vertx.version>1.2.0</bt.vertx.version>
+		<bt.vertx.version>1.3.0-SNAPSHOT</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
 		<vertx-ext-resources>20</vertx-ext-resources>
 		
