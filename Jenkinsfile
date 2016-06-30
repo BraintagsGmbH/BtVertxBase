@@ -5,7 +5,7 @@ node {
    stage 'Checkout'
 
    // Get some code from a GitHub repository
-   git url: 'https://github.com/BraintagsGmbH/BtBase.git'
+   git url: 'https://github.com/BraintagsGmbH/BtVertxBase.git'
 
    // Get the maven tool.
    // ** NOTE: This 'M3' maven tool must be configured
