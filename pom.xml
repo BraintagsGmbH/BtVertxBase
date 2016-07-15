@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>de.braintags</groupId>
 		<artifactId>btBasePOM</artifactId>
-		<version>17</version>
+		<version>19-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>btVertxBasePOM</artifactId>
@@ -21,7 +21,7 @@
   </scm>
 
 	<properties>
-		<bt.vertx.version>1.3.1</bt.vertx.version>
+		<bt.vertx.version>1.3.2-SNAPSHOT</bt.vertx.version>
 		<stack.version>3.2.1</stack.version>
 		<vertx-ext-resources>20</vertx-ext-resources>
 		
@@ -235,7 +235,6 @@
 									<annotationProcessor>io.vertx.docgen.DocGenProcessor</annotationProcessor>
 								</annotationProcessors>
 								<generatedSourcesDirectory>${project.basedir}/src/main/generated</generatedSourcesDirectory>
-								
 								<compilerArgs>
 		                          <arg>-XDignore.symbol.file</arg>
 									<arg>-AoutputDirectory=${project.basedir}/src/main</arg>
