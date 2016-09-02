@@ -1,0 +1,6 @@
+datastore
+mapper
+pojo
+identic
+html
+subobjects
