@@ -21,7 +21,7 @@
   </scm>
 
 	<properties>
-		<bt.vertx.version>1.3.2-SNAPSHOT</bt.vertx.version>
+		<bt.vertx.version>1.4.0-SNAPSHOT</bt.vertx.version>
 		<stack.version>3.4.0-SNAPSHOT</stack.version>
 		<vertx-ext-resources>20</vertx-ext-resources>
 		
