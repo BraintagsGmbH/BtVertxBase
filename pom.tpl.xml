@@ -47,7 +47,13 @@
 		<rubygems.asciidoctor>1.5.2</rubygems.asciidoctor>
 		<groovydoc-maven-plugin>1.3</groovydoc-maven-plugin>
 		<maven-assembly-plugin>2.5.3</maven-assembly-plugin>
-		<license-maven-plugin>1.8</license-maven-plugin>					
+		
+		<license-maven-plugin>1.12</license-maven-plugin>
+		<license.canUpdateDescription>false</license.canUpdateDescription>
+		<license.canUpdateCopyright>false</license.canUpdateCopyright>
+		<license.canUpdateLicense>false</license.canUpdateLicense>
+		<license.dryRun>false</license.dryRun>
+
 		<rubygems.yard.version>0.8.7.6</rubygems.yard.version>
 		<jsdoc3-maven-plugin>1.2.0</jsdoc3-maven-plugin>
 		<gem-maven-plugin>1.1.5</gem-maven-plugin>
@@ -286,12 +292,18 @@
 					<version>${license-maven-plugin}</version>
 					<configuration>
 						<licenseName>epl_only_v1</licenseName>
-						<licenseResolver>${project.baseUri}/license</licenseResolver>
+						<licenseResolver>${project.baseUri}/src/license</licenseResolver>
 						<organizationName>Braintags GmbH</organizationName>
-						<inceptionYear>2015</inceptionYear>
-						<canUpdateDescription>false</canUpdateDescription>
-						<canUpdateDescription>false</canUpdateDescription>
+						<inceptionYear>2017</inceptionYear>
+						<canUpdateDescription>${license.canUpdateDescription}</canUpdateDescription>
+						<canUpdateCopyright>${license.canUpdateCopyright}</canUpdateCopyright>
+						<canUpdateLicense>${license.canUpdateLicense}</canUpdateLicense>
 						<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+						<dryRun>${license.dryRun}</dryRun>
+			              <roots>
+			                <root>src/main/java</root>
+			                <root>src/test</root>
+			              </roots>	
 					</configuration>
 					<executions>
 						<execution>
@@ -306,6 +318,7 @@
 						</execution>
 					</executions>
 				</plugin>
+				
 			</plugins>
 		</pluginManagement>
 		
