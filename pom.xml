@@ -1,67 +1,142 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>de.braintags</groupId>
-		<artifactId>btBasePOM</artifactId>
-		<version>19-SNAPSHOT</version>
-	</parent>
+	<version>20-SNAPSHOT</version>
 
+	<!-- The groupId defines the group for this project Core-Projects goes to 
+		"de.braintags" Features goes to "de.braintags.feature" Applications goes 
+		to "de.braintags.apps" -->
+	<groupId>de.braintags</groupId>
+	<!-- The artifactId is the name of this project. It will be used for naming 
+		the jar too -->
 	<artifactId>btVertxBasePOM</artifactId>
-	<name>Braintags Vert.x Parent</name>
-	<description>POM for all projects, which are using vert.x</description>
-	<url>https://github.com/BraintagsGmbH/BtVertxBase</url>
+	<!-- The version of this project Append "-SNAPSHOT" to version make it a 
+		snapshot -->
+	<!-- Packaging is the type of this project "pom" = This Project is only 
+		a configuring project with no real jar or else "jar" = This Project will 
+		be build a jar -->
 	<packaging>pom</packaging>
 
-	<!-- https://github.com/BraintagsGmbH/BtVertxBase.git -->
-	<scm>
-		<connection>scm:git:git@github.com:BraintagsGmbH/BtVertxBase.git</connection>
-		<developerConnection>scm:git:git@github.com:BraintagsGmbH/BtVertxBase.git</developerConnection>
-		<url>git@github.com:BraintagsGmbH/BtVertxBase.git</url>
-  </scm>
+	<!-- Human readable name of this project -->
+	<name>Braintags Vert.x Parent</name>
+
+	<!-- Short Information about the company -->
+	<organization>
+		<name>Braintags GmbH</name>
+		<url>http://www.braintags.de</url>
+	</organization>
+	<description>POM for all braintags projects, which are using vert.x</description>
+	<url>https://github.com/BraintagsGmbH/BtVertxBase</url>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 1.0</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<parent>
+		<groupId>io.vertx</groupId>
+		<artifactId>vertx-ext-parent</artifactId>
+		<version>23</version>
+	</parent>
 
 	<properties>
-		<bt.vertx.version>1.4.0-SNAPSHOT</bt.vertx.version>
-		<stack.version>3.4.0-SNAPSHOT</stack.version>
-		<vertx-ext-resources>20</vertx-ext-resources>
-		
+		<!-- JACOCO -->
+		<jacoco.minimum>0.60</jacoco.minimum>
+		<jacoco.haltOnFailure>false</jacoco.haltOnFailure>
+		<ignoreFailedTests>false</ignoreFailedTests>
+
+		<!-- Skipping sonar qube? -->
+		<sonar.skip>true</sonar.skip>
+		<sonar.language>java</sonar.language>
+		<sonar.host.url>http://sqube.bt-rz.net</sonar.host.url>
     	<sonar.projectKey>${project.groupId}.vertx:${project.artifactId}</sonar.projectKey>
     	<sonar.language>java</sonar.language>
     	<sonar.useWsCache>true</sonar.useWsCache>
-		
-		<jsdoc.skip>true</jsdoc.skip>
-		<skipAssembly>true</skipAssembly>
-		
-		<!-- skip maven-compiler-plugin? -->
-		<skip.maven.compiler.plugin>true</skip.maven.compiler.plugin>
-		
-		<asciidoc.dir>${project.basedir}/src/docs/asciidoc</asciidoc.dir>
-		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-		<maven.javadoc.failOnError>true</maven.javadoc.failOnError>
 
-		<!-- Plugin Versions -->		
-		<build-helper-maven-plugin>1.10</build-helper-maven-plugin>
-		<gmavenplus-plugin>1.5</gmavenplus-plugin>
-		<asciidoctor-maven-plugin>1.5.3</asciidoctor-maven-plugin>
-		<rubygems.asciidoctor>1.5.2</rubygems.asciidoctor>
-		<groovydoc-maven-plugin>1.3</groovydoc-maven-plugin>
-		<maven-assembly-plugin>2.5.3</maven-assembly-plugin>
-		<license-maven-plugin>1.12</license-maven-plugin>
+		<testjar.skip>true</testjar.skip>
+		<maven.test.skip>true</maven.test.skip>
+		<!-- We skip sources jar generation as we do it with the assembly plugin 
+			to have greater control over the content -->
+		<source.skip>true</source.skip>
+		<doc.skip>true</doc.skip>
+		<jsdoc.skip>true</jsdoc.skip>
+
+		<!-- signing can be switched off for SNAPSHOT -->
+		<sign.skip>false</sign.skip>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Compiler plugin -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<javadocSourceFileInclude>de/braintags/**/*.java</javadocSourceFileInclude>
+
+		<!-- license properties -->
 		<license.canUpdateDescription>false</license.canUpdateDescription>
 		<license.canUpdateCopyright>false</license.canUpdateCopyright>
 		<license.canUpdateLicense>false</license.canUpdateLicense>
 		<license.dryRun>false</license.dryRun>
 
-		<rubygems.yard.version>0.8.7.6</rubygems.yard.version>
-		<jsdoc3-maven-plugin>1.2.0</jsdoc3-maven-plugin>
-		<gem-maven-plugin>1.1.5</gem-maven-plugin>
-		<maven-antrun-plugin>1.8</maven-antrun-plugin>
+		<!-- VERSIONS -->
+		<bt.vertx.version>1.4.0-SNAPSHOT</bt.vertx.version>
+		<stack.version>3.4.0-SNAPSHOT</stack.version>
+		
+		<sonar-jacoco-listeners>3.8</sonar-jacoco-listeners>
+		<jacoco.version>0.7.7.201606060606</jacoco.version>
+		<sonar.java.source>1.8</sonar.java.source>
+		<sonar-maven-plugin>3.0.1</sonar-maven-plugin>
+		<maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+		<log4j.version>1.2.17</log4j.version>
+		<license-maven-plugin>1.12</license-maven-plugin>
 
 	</properties>
 
 	<dependencyManagement>
+	<!-- third party -->
 		<dependencies>
+			<dependency>
+				<groupId>io.vertx</groupId>
+				<artifactId>vertx-dependencies</artifactId>
+				<version>${stack.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.vertx</groupId>
+				<artifactId>vertx-mongo-service</artifactId>
+				<scope>test</scope>
+				<classifier>tests</classifier>
+				<version>${stack.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+			</dependency>
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>${jacoco.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sonarsource.java</groupId>
+			<artifactId>sonar-jacoco-listeners</artifactId>
+			<version>${sonar-jacoco-listeners}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+<!-- braintags -->
 			<dependency>
 				<groupId>de.braintags</groupId>
 				<artifactId>vertx-util</artifactId>
@@ -116,29 +191,25 @@
 				<version>${bt.vertx.version}</version>
 			</dependency>
 
-			<dependency>
-				<groupId>io.vertx</groupId>
-				<artifactId>vertx-mongo-service</artifactId>
-				<scope>test</scope>
-				<classifier>tests</classifier>
-				<version>${stack.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.vertx</groupId>
-				<artifactId>vertx-dependencies</artifactId>
-				<version>${stack.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.11</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
+
 	<dependencies>
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sonarsource.java</groupId>
+			<artifactId>sonar-jacoco-listeners</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-core</artifactId>
@@ -147,6 +218,7 @@
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-codegen</artifactId>
 			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
@@ -165,7 +237,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
-			<artifactId>vertx-lang-js</artifactId>
+			<artifactId>vertx-lang-kotlin</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -175,13 +247,19 @@
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
+			<artifactId>vertx-lang-js</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>io.vertx</groupId>
 			<artifactId>vertx-rx-java</artifactId>
 			<optional>true</optional>
 		</dependency>
 
+		<!-- Testing -->
 		<dependency>
-			<groupId>io.vertx</groupId>
-			<artifactId>vertx-unit</artifactId>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -190,102 +268,91 @@
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-unit</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<executions>
-						<execution>
-							<id>default-clean</id>
-							<configuration>
-								<filesets>
-									<fileset>
-										<directory>${asciidoc.dir}/java</directory>
-									</fileset>
-									<fileset>
-										<directory>${asciidoc.dir}/groovy</directory>
-									</fileset>
-									<fileset>
-										<directory>${asciidoc.dir}/js</directory>
-									</fileset>
-									<fileset>
-										<directory>${asciidoc.dir}/ruby</directory>
-									</fileset>
-								</filesets>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<executions>
-						<execution>
-							<id>default-compile</id>
-							<configuration>
-				                <source>1.8</source> 
-				                <target>1.8</target> 
-				                <fork>true</fork>
-								<skip>${skip.maven.compiler.plugin}</skip>
-								<annotationProcessors>
-									<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
-									<annotationProcessor>io.vertx.docgen.JavaDocGenProcessor</annotationProcessor>
-									<annotationProcessor>io.vertx.docgen.DocGenProcessor</annotationProcessor>
-								</annotationProcessors>
-								<generatedSourcesDirectory>${project.basedir}/src/main/generated</generatedSourcesDirectory>
-								<compilerArgs>
-		                          <arg>-XDignore.symbol.file</arg>
-									<arg>-AoutputDirectory=${project.basedir}/src/main</arg>
-									<!-- $lang is replaced by the docgen processor to the target lang -->
-									<arg>-Adocgen.output=${asciidoc.dir}/$lang</arg>
-									<!-- properties replaced in the asciidoc document -->
-									<arg>-Amaven.groupId=${project.groupId}</arg>
-									<arg>-Amaven.artifactId=${project.artifactId}</arg>
-									<arg>-Amaven.version=${project.version}</arg>
-								</compilerArgs>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>${build-helper-maven-plugin}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.gmavenplus</groupId>
-					<artifactId>gmavenplus-plugin</artifactId>
-					<version>${gmavenplus-plugin}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.asciidoctor</groupId>
-					<artifactId>asciidoctor-maven-plugin</artifactId>
-					<version>${asciidoctor-maven-plugin}</version>
-				</plugin>
-				<plugin>
-					<groupId>com.bluetrainsoftware.maven</groupId>
-					<artifactId>groovydoc-maven-plugin</artifactId>
-					<version>${groovydoc-maven-plugin}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<configuration>
-						<sourcepath>${basedir}/src/main/java;${basedir}/src/main/generated</sourcepath>
-					</configuration>
-				</plugin>
-				<plugin>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>${maven-assembly-plugin}</version>
-				</plugin>
-				<plugin>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+						<configuration>
+							<skip>${sign.skip}</skip>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<rules>
+						<!-- implementation is needed only for Maven 2 -->
+						<rule implementation="org.jacoco.maven.RuleConfiguration">
+							<element>BUNDLE</element>
+							<excludes>
+								<exclude>*Test*</exclude>
+							</excludes>
+							<limits>
+								<!-- implementation is needed only for Maven 2 -->
+								<limit implementation="org.jacoco.report.check.Limit">
+									<counter>COMPLEXITY</counter>
+									<value>COVEREDRATIO</value>
+									<minimum>0.60</minimum>
+								</limit>
+							</limits>
+						</rule>
+					</rules>
+				</configuration>
+			</plugin>
+ 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>license-maven-plugin</artifactId>
 					<version>${license-maven-plugin}</version>
@@ -299,10 +366,10 @@
 						<canUpdateLicense>${license.canUpdateLicense}</canUpdateLicense>
 						<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
 						<dryRun>${license.dryRun}</dryRun>
-			              <roots>
-			                <root>src/main/java</root>
-			                <root>src/test</root>
-			              </roots>	
+						<roots>
+							<root>src/main/java</root>
+							<root>src/test</root>
+						</roots>
 					</configuration>
 					<executions>
 						<execution>
@@ -313,268 +380,110 @@
 							</goals>
 							<inherited>true</inherited>
 							<configuration>
+					             <excludes>
+					                <exclude>package-info.java</exclude>
+					              </excludes>
 							</configuration>
 						</execution>
 					</executions>
 				</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven.javadoc.plugin.version}</version>
+					<!-- Remove impl and keep only io/vertx files (no examples or docoverride) -->
+					<configuration>
+						<additionalparam>-Xdoclint:none</additionalparam>
+						<sourceFileExcludes>
+							<sourceFileExclude>**/package-info.java</sourceFileExclude>
+							<sourceFileExclude>**/impl/**</sourceFileExclude>
+						</sourceFileExcludes>
+						<sourceFileIncludes>
+							<sourceFileInclude>${javadocSourceFileInclude}</sourceFileInclude>
+						</sourceFileIncludes>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven.deploy.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<optimize>true</optimize>
+						<compilerArgument>-XDignore.symbol.file</compilerArgument>
+						<compilerArgs>
+							<arg>-XDignore.symbol.file</arg>
+						</compilerArgs>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven.surefire.plugin.version}</version>
+					<configuration>
+						<!-- Testing shall be executed by one Suites, which are calling each 
+							other test class -->
+						<includes>
+							<include>**/TestAll*.java</include>
+						</includes>
+						<failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+						<systemPropertyVariables>
+							<io.netty.leakDetectionLevel>PARANOID</io.netty.leakDetectionLevel>
+							<mailClientUserName>${mailClientUserName}</mailClientUserName>
+							<mailClientPassword>${mailClientPassword}</mailClientPassword>
+						</systemPropertyVariables>
+						<testFailureIgnore>${ignoreFailedTests}</testFailureIgnore>
+						<argLine>@{argLine} -server -Xmx1200M</argLine>
+						<forkCount>1</forkCount>
+						<reuseForks>false</reuseForks>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
-		
-				
-		<plugins>
-			<!-- Compile Groovy -->
-			<plugin>
-				<groupId>org.codehaus.gmavenplus</groupId>
-				<artifactId>gmavenplus-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- Have .groovy files in sources-jar -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-groovy-source</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>${basedir}/src/main/groovy</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Package sources -->
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<dependencies>
-					<dependency>
-						<groupId>io.vertx</groupId>
-						<artifactId>vertx-ext-resources</artifactId>
-						<version>${vertx-ext-resources}</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<id>package-sources</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<skipAssembly>${skipAssembly}</skipAssembly>
-							<attach>true</attach>
-							<archive>
-								<!-- Need a manifest to avoid empty archive -->
-								<manifest>
-								</manifest>
-							</archive>
-							<descriptorRefs>
-								<descriptorRef>sources</descriptorRef>
-							</descriptorRefs>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-		</plugins>
 	</build>
 
+	<!-- https://github.com/BraintagsGmbH/BtVertxBase.git -->
+	<scm>
+		<connection>scm:git:git@github.com:BraintagsGmbH/BtVertxBase.git</connection>
+		<developerConnection>scm:git:git@github.com:BraintagsGmbH/BtVertxBase.git</developerConnection>
+		<url>git@github.com:BraintagsGmbH/BtVertxBase.git</url>
+	</scm>
 
 	<profiles>
-		<!-- Documentation generation : use -DskipDocs to skip documentation generation -->
 		<profile>
-			<id>docs</id>
-			<activation>
-				<property>
-					<name>!skipDocs</name>
-				</property>
-			</activation>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>rubygems-releases</id>
-					<url>http://rubygems-proxy.torquebox.org/releases</url>
-				</pluginRepository>
-			</pluginRepositories>
-			<repositories>
-				<repository>
-					<id>rubygems-releases</id>
-					<url>http://rubygems-proxy.torquebox.org/releases</url>
-				</repository>
-			</repositories>
-			<dependencies>
-				<dependency>
-					<groupId>rubygems</groupId>
-					<artifactId>yard</artifactId>
-					<version>${rubygems.yard.version}</version>
-					<type>gem</type>
-					<scope>provided</scope>
-				</dependency>
-			</dependencies>
+			<id>sonatype-oss-release</id>
 			<build>
 				<plugins>
 					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>${maven-antrun-plugin}</version>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
 						<executions>
 							<execution>
-								<phase>process-sources</phase>
-								<configuration>
-									<target>
-										<mkdir dir="${asciidoc.dir}" />
-									</target>
-								</configuration>
+								<id>enforce-no-vertx-snapshots</id>
 								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.asciidoctor</groupId>
-						<artifactId>asciidoctor-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>asciidoctor</id>
-								<goals>
-									<goal>process-asciidoc</goal>
+									<goal>enforce</goal>
 								</goals>
 								<configuration>
-									<sourceDirectory>${asciidoc.dir}</sourceDirectory>
-									<outputDirectory>${project.build.directory}/docs/${project.artifactId}</outputDirectory>
-									<sourceHighlighter>coderay</sourceHighlighter>
-									<preserveDirectories>true</preserveDirectories>
-									<relativeBaseDir>true</relativeBaseDir>
-									<skip>${doc.skip}</skip>
-									<backend>html</backend>
-									<doctype>book</doctype>
-								</configuration>
-								<phase>prepare-package</phase>
-							</execution>
-						</executions>
-					</plugin>
-
-					<plugin>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>prepare-package</phase>
-								<configuration>
-									<skip>${doc.skip}</skip>
-									<reportOutputDirectory>${project.build.directory}/docs</reportOutputDirectory>
-								</configuration>
-								<goals>
-									<goal>javadoc</goal>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					
-					<plugin>
-						<groupId>com.phasebash.jsdoc</groupId>
-						<artifactId>jsdoc3-maven-plugin</artifactId>
-						<version>${jsdoc3-maven-plugin}</version>
-						<executions>
-							<execution>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>jsdoc3</goal>
-								</goals>
-								<configuration>
-									<recursive>true</recursive>
-									<skip>${jsdoc.skip}</skip>
-									<directoryRoots>
-										<directoryRoot>${basedir}/src/main/resources</directoryRoot>
-									</directoryRoots>
-									<outputDirectory>${project.build.directory}/docs/${project.artifactId}/js/jsdoc</outputDirectory>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>com.bluetrainsoftware.maven</groupId>
-						<artifactId>groovydoc-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>generate</goal>
-								</goals>
-								<configuration>
-									<destinationDirectory>${project.build.directory}/docs/${project.artifactId}/groovy/groovydoc</destinationDirectory>
-									<scope>public</scope>
-									<skipJavadoc>true</skipJavadoc>
-									<extensions>.groovy</extensions>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>de.saumya.mojo</groupId>
-						<artifactId>gem-maven-plugin</artifactId>
-						<version>${gem-maven-plugin}</version>
-						<executions>
-							<execution>
-								<goals>
-									<goal>exec</goal>
-								</goals>
-								<phase>prepare-package</phase>
-								<configuration>
-									<execArgs>${project.build.directory}/rubygems/bin/yardoc
-										--no-private -m html -o
-										${project.build.directory}/docs/${project.artifactId}/ruby/yardoc
-										${project.basedir}/src/main/resources/**/*.rb</execArgs>
-								</configuration>
-							</execution>
-						</executions>
-						<dependencies>
-							<dependency>
-								<groupId>rubygems</groupId>
-								<artifactId>yard</artifactId>
-								<version>${rubygems.yard.version}</version>
-								<type>gem</type>
-							</dependency>
-							<dependency>
-								<groupId>rubygems</groupId>
-								<artifactId>asciidoctor</artifactId>
-								<version>${rubygems.asciidoctor}</version>
-								<type>gem</type>
-							</dependency>
-						</dependencies>
-					</plugin>
-					<plugin>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<dependencies>
-							<dependency>
-								<groupId>io.vertx</groupId>
-								<artifactId>vertx-ext-resources</artifactId>
-								<version>${vertx-ext-resources}</version>
-							</dependency>
-						</dependencies>
-						<executions>
-							<execution>
-								<id>package-docs</id>
-								<phase>package</phase>
-								<goals>
-									<goal>single</goal>
-								</goals>
-								<configuration>
-									<skipAssembly>${doc.skip}</skipAssembly>
-									<attach>true</attach>
-									<descriptorRefs>
-										<descriptorRef>docs</descriptorRef>
-									</descriptorRefs>
+									<rules>
+										<requireReleaseDeps>
+											<message>No Vert.x Snapshots Allowed during a release!</message>
+											<includes>
+												<include>de.braintags.io.vertx:*</include>
+											</includes>
+										</requireReleaseDeps>
+									</rules>
+									<fail>true</fail>
 								</configuration>
 							</execution>
 						</executions>
@@ -583,5 +492,6 @@
 			</build>
 		</profile>
 	</profiles>
+
 
 </project>
