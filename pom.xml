@@ -75,7 +75,8 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 
 		<javadocSourceFileInclude>de/braintags/**/*.java</javadocSourceFileInclude>
-
+		<asciidoc.dir>${project.basedir}/src/docs/asciidoc</asciidoc.dir>
+		
 		<!-- license properties -->
 		<license.canUpdateDescription>false</license.canUpdateDescription>
 		<license.canUpdateCopyright>false</license.canUpdateCopyright>
