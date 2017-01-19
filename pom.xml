@@ -48,14 +48,17 @@
 		<jacoco.minimum>0.60</jacoco.minimum>
 		<jacoco.haltOnFailure>false</jacoco.haltOnFailure>
 		<ignoreFailedTests>false</ignoreFailedTests>
+		
+		<!-- further system properties for surefire testing, for example -DstartMongoLocal=true -->
+		<surefireArgLine></surefireArgLine>
 
 		<!-- Skipping sonar qube? -->
 		<sonar.skip>true</sonar.skip>
 		<sonar.language>java</sonar.language>
 		<sonar.host.url>http://sqube.bt-rz.net</sonar.host.url>
-    	<sonar.projectKey>${project.groupId}.vertx:${project.artifactId}</sonar.projectKey>
-    	<sonar.language>java</sonar.language>
-    	<sonar.useWsCache>true</sonar.useWsCache>
+		<sonar.projectKey>${project.groupId}.vertx:${project.artifactId}</sonar.projectKey>
+		<sonar.language>java</sonar.language>
+		<sonar.useWsCache>true</sonar.useWsCache>
 
 		<testjar.skip>true</testjar.skip>
 		<maven.test.skip>true</maven.test.skip>
@@ -76,8 +79,9 @@
 
 		<javadocSourceFileInclude>de/braintags/**/*.java</javadocSourceFileInclude>
 		<asciidoc.dir>${project.basedir}/src/docs/asciidoc</asciidoc.dir>
-		
+
 		<!-- license properties -->
+		<license.skip>false</license.skip>
 		<license.canUpdateDescription>false</license.canUpdateDescription>
 		<license.canUpdateCopyright>false</license.canUpdateCopyright>
 		<license.canUpdateLicense>false</license.canUpdateLicense>
@@ -85,8 +89,13 @@
 
 		<!-- VERSIONS -->
 		<bt.vertx.version>1.4.0-SNAPSHOT</bt.vertx.version>
+		<vertx-auth-datastore-version>1.0.0-SNAPSHOT</vertx-auth-datastore-version>
+		<netrelay.version>10.2.0-SNAPSHOT</netrelay.version>
+		<netrelay-controller.version>1.2.0-SNAPSHOT</netrelay-controller.version>
+
 		<stack.version>3.4.0-SNAPSHOT</stack.version>
-		
+		<thymeleaf.version>3.0.1.RELEASE</thymeleaf.version>
+
 		<sonar-jacoco-listeners>3.8</sonar-jacoco-listeners>
 		<jacoco.version>0.7.7.201606060606</jacoco.version>
 		<sonar.java.source>1.8</sonar.java.source>
@@ -99,7 +108,7 @@
 	</properties>
 
 	<dependencyManagement>
-	<!-- third party -->
+		<!-- third party -->
 		<dependencies>
 			<dependency>
 				<groupId>io.vertx</groupId>
@@ -120,24 +129,31 @@
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
 			</dependency>
-		<dependency>
-			<groupId>org.jacoco</groupId>
-			<artifactId>jacoco-maven-plugin</artifactId>
-			<version>${jacoco.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sonarsource.java</groupId>
-			<artifactId>sonar-jacoco-listeners</artifactId>
-			<version>${sonar-jacoco-listeners}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.sonarsource.java</groupId>
+				<artifactId>sonar-jacoco-listeners</artifactId>
+				<version>${sonar-jacoco-listeners}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.vertx</groupId>
+				<artifactId>vertx-web</artifactId>
+				<version>${stack.version}</version>
+				<scope>test</scope>
+				<type>test-jar</type>
+			</dependency>
 
-<!-- braintags -->
+			<!-- braintags -->
 			<dependency>
 				<groupId>de.braintags</groupId>
 				<artifactId>vertx-util</artifactId>
@@ -190,6 +206,42 @@
 				<artifactId>vertx-pojo-mapper-json</artifactId>
 				<classifier>tests</classifier>
 				<version>${bt.vertx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-auth-datastore</artifactId>
+				<version>${vertx-auth-datastore-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>vertx-auth-datastore</artifactId>
+				<version>${vertx-auth-datastore-version}</version>
+				<classifier>tests</classifier>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>netrelay</artifactId>
+				<version>${netrelay.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>netrelay</artifactId>
+				<version>${netrelay.version}</version>
+				<classifier>tests</classifier>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>NetRelayController</artifactId>
+				<version>${netrelay-controller.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.braintags</groupId>
+				<artifactId>NetRelayController</artifactId>
+				<version>${netrelay-controller.version}</version>
+				<classifier>tests</classifier>
+				<scope>test</scope>
 			</dependency>
 
 		</dependencies>
@@ -308,6 +360,36 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<!-- Testing shall be executed by one Suites, which are calling each 
+						other test class -->
+					<includes>
+						<include>**/TestAll*.java</include>
+					</includes>
+					<failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+					<systemPropertyVariables>
+						<io.netty.leakDetectionLevel>PARANOID</io.netty.leakDetectionLevel>
+						<mailClientUserName>${mailClientUserName}</mailClientUserName>
+						<mailClientPassword>${mailClientPassword}</mailClientPassword>
+					</systemPropertyVariables>
+					<testFailureIgnore>${ignoreFailedTests}</testFailureIgnore>
+					<argLine>@{argLine} -server -Xmx1200M @{surefireArgLine} </argLine>
+					<forkCount>1</forkCount>
+					<!--  let it true, otherwise an error with -->
+					<reuseForks>true</reuseForks>
+					<properties>
+						<property>
+							<name>listener</name>
+							<value>org.sonar.java.jacoco.JUnitListener</value>
+						</property>
+					</properties>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -353,46 +435,49 @@
 					</rules>
 				</configuration>
 			</plugin>
- 				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>license-maven-plugin</artifactId>
-					<version>${license-maven-plugin}</version>
-					<configuration>
-						<licenseName>epl_only_v1</licenseName>
-						<licenseResolver>${project.baseUri}/src/license</licenseResolver>
-						<organizationName>Braintags GmbH</organizationName>
-						<inceptionYear>2017</inceptionYear>
-						<canUpdateDescription>${license.canUpdateDescription}</canUpdateDescription>
-						<canUpdateCopyright>${license.canUpdateCopyright}</canUpdateCopyright>
-						<canUpdateLicense>${license.canUpdateLicense}</canUpdateLicense>
-						<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
-						<dryRun>${license.dryRun}</dryRun>
-						<roots>
-							<root>src/main/java</root>
-							<root>src/test</root>
-						</roots>
-					</configuration>
-					<executions>
-						<execution>
-							<id>updateLicense</id>
-							<phase>process-sources</phase>
-							<goals>
-								<goal>update-file-header</goal>
-							</goals>
-							<inherited>true</inherited>
-							<configuration>
-					             <excludes>
-					                <exclude>package-info.java</exclude>
-					              </excludes>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
+			
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>${license-maven-plugin}</version>
+				<configuration>
+					<licenseName>epl_only_v1</licenseName>
+					<licenseResolver>${project.baseUri}/src/license</licenseResolver>
+					<organizationName>Braintags GmbH</organizationName>
+					<inceptionYear>2017</inceptionYear>
+					<canUpdateDescription>${license.canUpdateDescription}</canUpdateDescription>
+					<canUpdateCopyright>${license.canUpdateCopyright}</canUpdateCopyright>
+					<canUpdateLicense>${license.canUpdateLicense}</canUpdateLicense>
+					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+					<dryRun>${license.dryRun}</dryRun>
+					<roots>
+						<root>src/main/java</root>
+						<root>src/test</root>
+					</roots>
+				</configuration>
+				<executions>
+					<execution>
+						<id>updateLicense</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>update-file-header</goal>
+						</goals>
+						<inherited>true</inherited>
+						<configuration>
+							<skipUpdateLicense>${license.skip}</skipUpdateLicense>
+							<excludes>
+								<exclude>package-info.java</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 
 		<pluginManagement>
 			<plugins>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
@@ -425,29 +510,6 @@
 						<compilerArgs>
 							<arg>-XDignore.symbol.file</arg>
 						</compilerArgs>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>${maven.surefire.plugin.version}</version>
-					<configuration>
-						<!-- Testing shall be executed by one Suites, which are calling each 
-							other test class -->
-						<includes>
-							<include>**/TestAll*.java</include>
-						</includes>
-						<failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
-						<systemPropertyVariables>
-							<io.netty.leakDetectionLevel>PARANOID</io.netty.leakDetectionLevel>
-							<mailClientUserName>${mailClientUserName}</mailClientUserName>
-							<mailClientPassword>${mailClientPassword}</mailClientPassword>
-						</systemPropertyVariables>
-						<testFailureIgnore>${ignoreFailedTests}</testFailureIgnore>
-						<argLine>@{argLine} -server -Xmx1200M</argLine>
-						<forkCount>1</forkCount>
-						<reuseForks>false</reuseForks>
 					</configuration>
 				</plugin>
 			</plugins>
