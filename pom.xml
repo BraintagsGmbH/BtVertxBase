@@ -48,7 +48,7 @@
 		<jacoco.minimum>0.60</jacoco.minimum>
 		<jacoco.haltOnFailure>false</jacoco.haltOnFailure>
 		<ignoreFailedTests>false</ignoreFailedTests>
-		
+
 		<!-- further system properties for surefire testing, for example -DstartMongoLocal=true -->
 		<surefireArgLine></surefireArgLine>
 
@@ -379,7 +379,7 @@
 					<testFailureIgnore>${ignoreFailedTests}</testFailureIgnore>
 					<argLine>@{argLine} -server -Xmx1200M @{surefireArgLine} </argLine>
 					<forkCount>1</forkCount>
-					<!--  let it true, otherwise an error with -->
+					<!-- let it true, otherwise an error with -->
 					<reuseForks>true</reuseForks>
 					<properties>
 						<property>
@@ -435,8 +435,8 @@
 					</rules>
 				</configuration>
 			</plugin>
-			
-			
+
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
@@ -473,11 +473,47 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Generate sources before compilation -->
+			<plugin>
+				<groupId>org.bsc.maven</groupId>
+				<artifactId>maven-processor-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<phase>generate-sources</phase>
+						<configuration>
+							<skip>${doc.skip}</skip>
+							<systemProperties>
+								<java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+							</systemProperties>
+							<processors>
+								<processor>io.vertx.codegen.CodeGenProcessor</processor>
+								<processor>io.vertx.docgen.JavaDocGenProcessor</processor>
+								<processor>io.vertx.docgen.DocGenProcessor</processor>
+							</processors>
+							<optionMap>
+								<outputDirectory>${project.basedir}/src/main</outputDirectory>
+								<!-- $lang is replaced by the docgen processor to the target lang -->
+								<docgen.output>${asciidoc.dir}/$lang</docgen.output>
+								<maven.groupId>${project.groupId}</maven.groupId>
+								<maven.artifactId>${project.artifactId}</maven.artifactId>
+								<maven.version>${project.version}</maven.version>
+							</optionMap>
+							<defaultOutputDirectory>${project.build.directory}/generated-sources/annotations</defaultOutputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 
 		<pluginManagement>
 			<plugins>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
