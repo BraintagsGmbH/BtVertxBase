@@ -578,7 +578,7 @@
 										<requireReleaseDeps>
 											<message>No Vert.x Snapshots Allowed during a release!</message>
 											<includes>
-												<include>de.braintags.io.vertx:*</include>
+												<include>de.braintags:*</include>
 											</includes>
 										</requireReleaseDeps>
 									</rules>
