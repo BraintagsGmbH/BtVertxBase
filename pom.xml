@@ -49,6 +49,9 @@
 		<jacoco.haltOnFailure>false</jacoco.haltOnFailure>
 		<ignoreFailedTests>false</ignoreFailedTests>
 
+		<jackson.version>2.8.7</jackson.version>
+		<jackson-module.version>2.4.0</jackson-module.version>
+
 		<!-- further system properties for surefire testing, for example -DstartMongoLocal=true -->
 		<surefireArgLine></surefireArgLine>
 
@@ -165,6 +168,23 @@
 				<scope>test</scope>
 				<type>test-jar</type>
 			</dependency>
+
+		      <dependency>
+		        <groupId>com.fasterxml.jackson.core</groupId>
+		        <artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+		      </dependency>
+		      <dependency>
+		        <groupId>com.fasterxml.jackson.core</groupId>
+		        <artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+		      </dependency>
+				<dependency>
+				  <groupId>com.fasterxml.jackson.module</groupId>
+				  <artifactId>jackson-module-jaxb-annotations</artifactId>
+				<version>${jackson-module.version}</version>
+				</dependency>
+
 
 			<!-- braintags -->
 			<dependency>
